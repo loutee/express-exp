@@ -6,24 +6,12 @@ const MongoClient = require('mongodb').MongoClient
 
 
 app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json())
+app.use(express.static('public'))
 app.set('view engine', 'ejs')
 
-app.get('/', (req, res) => {
 
-  //res.sendFile(__dirname + '/index.html');
-
-  db.collection('abilities').find().toArray( (err, result) => {
-
-    if (err) console.log(err)
-
-    // renders index.ejs
-
-    res.render('index.ejs', {ability: result})
-
-  })
-
-})
-
+// CREATE
 app.post('/abilities', (req, res) => {
 
   db.collection('abilities').save(req.body, (err, result) => {
@@ -35,8 +23,23 @@ app.post('/abilities', (req, res) => {
   })
 })
 
-var db
+// READ
+app.get('/', (req, res) => {
 
+  db.collection('abilities').find().toArray( (err, result) => {
+    if (err) console.log(err)
+    // renders index.ejs
+    res.render('index.ejs', {ability: result})
+  })
+
+})
+
+// UPDATE
+
+
+
+// Connect to database, run server if successful
+var db
 MongoClient.connect('mongodb://admin:foobar@ds161890.mlab.com:61890/hero-abilities', (err, database) => {
 
   if (err) return console.log(err)
