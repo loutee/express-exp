@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Experimental App</title>
+</head>
+<body>
+  An Experimental Node.js Express application.
+
+  <ul class='abilities'>
+    <% for(var i=0; i<ability.length; i++) {%>
+      <li class='ability'>
+        <span><%= ability[i].name %></span>
+        <span><%= ability[i].ability %></span>
+      </li>
+    <% } %>
+  </ul>
+
+  <form action='/abilities' method='POST'>
+    <input type='text' placeholder='name' name='name'>
+    <input type='text' placeholder='ability' name='ability'>
+    <button type='submit'>Submit</button>
+  </form>
+
+</body>
+</html>
+

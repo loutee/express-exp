@@ -6,10 +6,21 @@ const MongoClient = require('mongodb').MongoClient
 
 
 app.use(bodyParser.urlencoded({extended: true}))
+app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
 
-  res.sendFile(__dirname + '/index.html');
+  //res.sendFile(__dirname + '/index.html');
+
+  db.collection('abilities').find().toArray( (err, result) => {
+
+    if (err) console.log(err)
+
+    // renders index.ejs
+
+    res.render('index.ejs', {ability: result})
+
+  })
 
 })
 
