@@ -35,8 +35,29 @@ app.get('/', (req, res) => {
 })
 
 // UPDATE
+app.put('/abilities', (req, res) => {
 
+  db.collection('abilities')
+  .findOneAndUpdate({name: 'Ironman'}, {
 
+    $set: {
+      name: req.body.name,
+      ability: req.body.ability
+    }
+
+  }, {
+
+    sort: {_id: -1},
+    upsert: true
+
+  }, (err, result) => {
+
+    if(err) return res.send(err)
+    res.send(result)
+
+  })
+
+})
 
 // Connect to database, run server if successful
 var db

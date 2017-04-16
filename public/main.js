@@ -8,7 +8,15 @@ update.addEventListener('click', () => {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({
       'name': 'Hero',
-      'ability: 'Ability'
+      'ability': 'Ability'
+    })
+  })
+  .then(res => {
+    if (res.ok) return res.json()
+  })
+  .then(data => {
+    console.log(data)
+    window.location.reload(true)
   })
 
 })
