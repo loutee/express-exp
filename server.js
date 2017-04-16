@@ -9,6 +9,12 @@ app.get('/', (req, res) => {
 
 });
 
+app.post('/abilities', (req, res) => {
+
+  console.log('POST request made');
+
+});
+
 app.listen(3000, () => {
 
   console.log('listening on 3000');
