@@ -2,6 +2,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
+const MongoClient = require('mongodb').MongoClient
+
 
 app.use(bodyParser.urlencoded({extended: true}))
 
@@ -13,12 +15,24 @@ app.get('/', (req, res) => {
 
 app.post('/abilities', (req, res) => {
 
-  console.log(req.body)
+  db.collection('abilities').save(req.body, (err, result) => {
 
+    if (err) return console.log(err)
+    console.log('saved to database')
+    res.redirect('/')
+
+  })
 })
 
-app.listen(3000, () => {
+var db
 
-  console.log('listening on 3000')
+MongoClient.connect('mongodb://admin:foobar@ds161890.mlab.com:61890/hero-abilities', (err, database) => {
 
+  if (err) return console.log(err)
+  db = database
+  app.listen(3000, () => {
+
+    console.log('listening on 3000')
+
+  })
 })
