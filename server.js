@@ -31,7 +31,6 @@ app.get('/', (req, res) => {
     // renders index.ejs
     res.render('index.ejs', {ability: result})
   })
-
 })
 
 // UPDATE
@@ -54,6 +53,18 @@ app.put('/abilities', (req, res) => {
 
     if(err) return res.send(err)
     res.send(result)
+
+  })
+})
+
+// DELETE
+app.delete('/abilities', (req,res) => {
+
+  db.collection('abilities').findOneAndDelete({name: req.body.name},
+  (err, result) => {
+
+    if (err) return res.send(500, err)
+    res.json('Entry deleted')
 
   })
 
