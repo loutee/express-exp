@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <% include ../partials/header.ejs %>
+  <form action="/user", method="POST">
+    <div>
+      Name:
+      <input name="name"><br>
+      Age:
+      <input name="age"><br>
+      <input type="submit" value="Submit">
+    </div>
+  </form>
+  <% include ../partials/footer.ejs %>
+</body>
+</html>
