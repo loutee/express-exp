@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
     name: String,
-    age: Number
+    age: {type: Number}
 });
 
 var User = mongoose.model('User', userSchema);
@@ -26,10 +26,12 @@ router.post('/new', function(req, res) {
     });
 
     newUser.save(function(err, User){
-      if(err)
+      if(err) {
         res.render('users/show_message', {message: "Database error", type: "error"});
-      else
+        console.log(err);
+      } else {
         res.render('users/show_message', {message: "New user added", type: "success", user: userInfo});
+      }
     });
   }
 });
