@@ -1,5 +1,6 @@
-module.exports = function(db) {
-  this.db = db;
+module.exports = function(response, template) {
+  this.response = response;
+  this.template = template;
 };
 
 module.exports.prototype = {
@@ -11,11 +12,9 @@ module.exports.prototype = {
     }
     return Child;
   },
-  setDB: function(db) {
-    this.db = db;
-  },
-  collection: function() {
-    if(this._collection) return this._collection;
-    return this._collection = this.db.collection('expapp-content');
+  render: function(data) {
+    if(this.response && this.template) {
+      this.response.render(this.template, data);
+    }
   }
 }
