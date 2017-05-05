@@ -8,6 +8,7 @@ var config = require('../config')();
 var app = require('../app');
 var debug = require('debug')('ex3:server');
 var http = require('http');
+var MongoClient = require('mongodb').MongoClient;
 
 /**
  * Create HTTP server.
@@ -22,14 +23,14 @@ var server = http.createServer(app);
 
 MongoClient.connect('mongodb://127.0.0.1:27017/expapp', function(err, db) {
   if(err) {
-    console.log("No mongodb server is running.);
+    console.log("No mongodb server is running.");
   } else {
     var attachDB = function(req, res, next) {
       req.db = db;
       next();
     };
     http.createServer(app).listen(config.port, function() {
-      console.log('Express server listening on port' + config.port);
+      console.log('Express server listening on port ' + config.port);
     });
   }
 });
