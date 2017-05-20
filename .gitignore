@@ -1,3 +1,4 @@
 *.log
 *.swp
-node_modules/
+ex*/node_modules/
+ex4/cs.json
